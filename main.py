@@ -25,7 +25,7 @@ def get_weather():
   week_list[datetime.date(today).weekday()]
   weather = res['data']['list'][0]
   low =  round(weather['low'],2)
-  high =  round(weather['high'],2)
+  high =  int(weather['high'])
   return weather['weather'], math.floor(weather['temp']),week_list[datetime.date(today).weekday()],city,high,low
 
 def get_count():

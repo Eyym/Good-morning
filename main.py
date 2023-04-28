@@ -18,15 +18,32 @@ user_id = os.environ["USER_ID"]
 template_id = os.environ["TEMPLATE_ID"]
 
 
+# def get_weather():
+#   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
+#   res = requests.get(url).json()
+#   week_list = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+#   week_list[datetime.date(today).weekday()]
+#   weather = res['data']['list'][0]
+#   low =  int(weather['low'])
+#   high =  int(weather['high'])
+#   return weather['weather'], math.floor(weather['temp']),week_list[datetime.date(today).weekday()],city,high,low
+
 def get_weather():
-  url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
-  res = requests.get(url).json()
-  week_list = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
-  week_list[datetime.date(today).weekday()]
-  weather = res['data']['list'][0]
-  low =  int(weather['low'])
-  high =  int(weather['high'])
-  return weather['weather'], math.floor(weather['temp']),week_list[datetime.date(today).weekday()],city,high,low
+    url = 'https://www.yiketianqi.com/free/day?appid=63984366&appsecret=useiPJq2&unescape=1&city=南昌'
+    res = requests.get(url).json()
+    city = res['city']
+    weather = res['wea']
+    low = res['tem_night']
+    high =  res['tem_day']
+    week = res['week']
+    tem = res['tem']
+    print("地区:"+city)
+    print("今日天气:"+weather)
+    print("最高气温:"+high)
+    print("最低气温:"+low)
+    print("当前温度:"+tem)
+    print("week:"+week)
+    return weather,tem,week,city,high,low
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
